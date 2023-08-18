@@ -1,0 +1,7 @@
+streamlit
+pandas 
+langchain
+apikey
+OpenAI
+requests
+json
