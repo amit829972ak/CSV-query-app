@@ -5,3 +5,4 @@ apikey
 OpenAI
 requests
 streamlit_lottie
+python == 3.9.12
