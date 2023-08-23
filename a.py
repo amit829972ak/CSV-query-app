@@ -25,20 +25,25 @@ os.environ["OPENAI_API_KEY"] = st.sidebar.text_input("Please enter your openai a
 
 # Define Streamlit app
 def app():
-      # Title and description
-    st.title("Chat with your file")
-    st.write("Upload a CSV or Excel file and get your answers.")
-    file =  st.file_uploader("Upload your file",type=["csv","xlsx"])
+    # Title and description
+    st.title("CSV Query App")
+    st.write("Upload a CSV or Excel file and enter a query to get an answer.")
+    file =  st.file_uploader("Upload CSV or Excel file",type=["csv", "xlsx"])
     if not file:
         st.stop()
-        try:
-            data = pd.read_csv(file)
-        except:
-            data = pd.read_excel(file)    
-        st.write("Data Preview:")
-        st.dataframe(data.head()) 
 
-    agent = create_pandas_dataframe_agent(OpenAI(temperature=0),data,verbose=True) 
+    if file.name.endswith(".csv"):
+        data = pd.read_csv(file)
+    elif file.name.endswith(".xlsx"):
+        data = pd.read_excel(file)
+    else:
+        st.write("Unsupported file type")
+        st.stop()
+
+    st.write("Data Preview:")
+    st.dataframe(data.head()) 
+
+    agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5),data,verbose=True) 
 
     query = st.text_input("Enter a query:") 
 
@@ -46,5 +51,6 @@ def app():
         answer = agent.run(query)
         st.write("Answer:")
         st.write(answer)
+
 if __name__ == "__main__":
-    app()   
+    app()
