@@ -3,10 +3,11 @@ import streamlit as st
 import pandas as pd
 from langchain.agents import create_pandas_dataframe_agent
 from langchain.llms import OpenAI
-from apikey import apikey
 import json
 import requests
 from streamlit_lottie import st_lottie
+import chardet
+
 
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -33,7 +34,11 @@ def app():
         st.stop()
 
     if file.name.endswith(".csv"):
-        data = pd.read_csv(file)
+        import chardet
+        result = chardet.detect(file.read())
+        encoding = result['encoding']
+        file.seek(0)
+        data = pd.read_csv(file, encoding=encoding)
     elif file.name.endswith(".xlsx"):
         data = pd.read_excel(file)
     else:
@@ -41,7 +46,7 @@ def app():
         st.stop()
 
     st.write("Data Preview:")
-    st.dataframe(data.head()) 
+    st.dataframe(data.head())
 
     agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5),data,verbose=True) 
 
