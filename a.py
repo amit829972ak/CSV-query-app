@@ -46,7 +46,7 @@ def app():
         st.stop()
 
     st.write("Data Preview:")
-    st.dataframe(data)
+    st.dataframe(data.head())
 
     agent = create_pandas_dataframe_agent(OpenAI(temperature=0.5),data,verbose=True) 
 
