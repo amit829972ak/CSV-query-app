@@ -6,3 +6,4 @@ OpenAI
 requests
 streamlit_lottie
 tabulate
+openpyxl
