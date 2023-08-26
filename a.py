@@ -73,7 +73,7 @@ def app():
         elif plot_type == "Scatter plot":
             data.plot.scatter(x=x_col, y=y_col)
             st.pyplot()
-
+st.set_option('deprecation.showPyplotGlobalUse', False)
 if __name__ == "__main__":
     app()
     
