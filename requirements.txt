@@ -8,3 +8,4 @@ streamlit_lottie
 tabulate
 openpyxl
 chardet
+matplotlib
