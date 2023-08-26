@@ -68,7 +68,7 @@ def app():
             data.plot.bar(x=x_col, y=y_col)
             st.pyplot()
         elif plot_type == "Box plot":
-            data[[x_col, y_col]].plot.box()
+            data[[x_col]].plot.box()
             st.pyplot()
         elif plot_type == "Scatter plot":
             data.plot.scatter(x=x_col, y=y_col)
