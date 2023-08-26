@@ -7,7 +7,7 @@ import json
 import requests
 from streamlit_lottie import st_lottie
 import chardet
-
+import matplotlib.pyplot as plt
 
 def load_lottieurl(url: str):
     r = requests.get(url)
