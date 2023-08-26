@@ -57,5 +57,23 @@ def app():
         st.write("Answer:")
         st.write(answer)
 
+    # Plotting options
+    plot_type = st.selectbox("Select plot type", ["None", "Bar graph", "Box plot", "Scatter plot"])
+    
+    if plot_type != "None":
+        x_col = st.selectbox("Select x-axis column", data.columns)
+        y_col = st.selectbox("Select y-axis column", data.columns)
+
+        if plot_type == "Bar graph":
+            data.plot.bar(x=x_col, y=y_col)
+            st.pyplot()
+        elif plot_type == "Box plot":
+            data[[x_col, y_col]].plot.box()
+            st.pyplot()
+        elif plot_type == "Scatter plot":
+            data.plot.scatter(x=x_col, y=y_col)
+            st.pyplot()
+
 if __name__ == "__main__":
     app()
+    
