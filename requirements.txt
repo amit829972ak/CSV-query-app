@@ -1,6 +1,7 @@
 streamlit
-pandas 
+pandas
 langchain
 apikey
 OpenAI
-
+bs4
+BeautifulSoup
